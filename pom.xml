@@ -118,6 +118,13 @@
     </build>
     <packaging>jar</packaging>
 
+    <repositories>
+        <repository>
+            <id>java-sdk</id>
+            <url>https://maven.zohodl.com</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
         <dependency>
