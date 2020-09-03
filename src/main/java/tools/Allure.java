@@ -13,11 +13,11 @@ public class Allure {
     private String commandServe = "cd " + projectPath + " && allure serve target/allure-results --host " + ip + " --port 9999";
 
 
-    public void showReport() {
+    public void showReport(String slackWebHook) {
         Terminal terminal = new Terminal();
         terminal.run(commandReport);
 
-        new Slack(Slack.WebHook.TESTING.value)
+        new Slack(slackWebHook)
                 .send("Testing of *" + projectName() + "* project is completed.\n Report is available by following link: " + reportHomePage);
 
         terminal.run(commandServe);

@@ -24,15 +24,4 @@ public class Slack {
                 .body(data.toJSONString())
                 .post("");
     }
-
-
-    public enum WebHook {
-        QATEAM  ("https://hooks.slack.com/services/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"),
-        TESTING ("https://hooks.slack.com/services/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"),
-        ;
-        public final String value;
-        WebHook(String value) {
-            this.value = value;
-        }
-    }
 }

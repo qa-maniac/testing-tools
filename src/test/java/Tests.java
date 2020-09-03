@@ -1,7 +1,6 @@
 import io.restassured.response.Response;
 import org.junit.Test;
 import org.languagetool.language.AmericanEnglish;
-import tools.Slack;
 import tools.rest.RequestMethod;
 import tools.rest.Rest;
 import tools.text.IgnoredSpelling;
@@ -9,7 +8,6 @@ import tools.text.Spelling;
 import tools.zoho.ZohoApi;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 
@@ -46,28 +44,5 @@ public class Tests {
         Spelling tool = new Spelling(new AmericanEnglish());
         String result = tool.check(text, ignore);
         System.out.println(result);
-    }
-
-    @Test
-    public void checkZoho() {
-        ZohoApi zoho = new ZohoApi();
-        Response response = zoho.getUserByEmail("maksym.ivanov@elegro.eu");
-        System.out.println(response.prettyPrint());
-    }
-
-    @Test
-    public void checkSlack() {
-        Slack slack = new Slack(Slack.WebHook.TESTING.value);
-        slack.send("Current time: " + new Date());
-    }
-
-    @Test
-    public void checkZohoApi() {
-        ZohoApi api = new ZohoApi();
-        Response response = api.getUserByEmail("maksym.ivanov@elegro.eu");
-        String id = response.jsonPath().get().toString()
-                .split(", Typt_of_Activity")[0]
-                .split("Stage=null, id=")[1];
-        System.out.println(id);
     }
 }
