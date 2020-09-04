@@ -89,7 +89,7 @@ public class ZohoApi {
 
 
     private String getAccessToken() {
-        long time = data.getTime();
+        long time = Long.parseLong(data.getTime());
         Calendar date = Calendar.getInstance();
 
         if (time > date.getTimeInMillis()) return data.getAuthToken();
@@ -117,7 +117,7 @@ public class ZohoApi {
         data.setAuthToken(token);
 
         Calendar date = Calendar.getInstance();
-        data.setTime(date.getTimeInMillis() + 3600000);
+        data.setTime(Long.toString(date.getTimeInMillis() + 3600000));
     }
 
 
