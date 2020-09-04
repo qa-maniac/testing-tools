@@ -3,7 +3,6 @@ package tools.zoho;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import tools.Config;
 
 import java.util.Calendar;
 
@@ -11,7 +10,7 @@ import java.util.Calendar;
 public class ZohoApi {
 
     private final String baseUrl = "https://www.zohoapis.com/crm/v2";
-    private ZohoData data = new ZohoData();
+    private ZohoData data = new ZohoData(false);
 
     public enum Api {
         DEALS_BY_CRITERIA   ("/Deals/search?criteria="),
@@ -90,7 +89,7 @@ public class ZohoApi {
 
 
     private String getAccessToken() {
-        long time = data.getTime();;
+        long time = data.getTime();
         Calendar date = Calendar.getInstance();
 
         if (time > date.getTimeInMillis()) return data.getAuthToken();
@@ -115,13 +114,10 @@ public class ZohoApi {
 
 
     private void updateZohoData(String token) {
-        Config config = new Config(data.getConfigFilePath());
-        config.set(ZohoDataKey.AUTHTOKEN.toString(), token);
+        data.setAuthToken(token);
 
         Calendar date = Calendar.getInstance();
-        config.set(ZohoDataKey.TIME.toString(), String.valueOf(date.getTimeInMillis() + 3600000));
-
-        data = new ZohoData();
+        data.setTime(date.getTimeInMillis() + 3600000);
     }
 
 
