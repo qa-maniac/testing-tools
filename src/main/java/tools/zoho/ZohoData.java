@@ -7,18 +7,18 @@ import java.util.Properties;
 
 public class ZohoData {
 
-    private String CONFIG_FILE_PATH = "zoho.properties";
     private String clientId;
     private String grantToken;
     private String clientSecret;
     private String redirectUri;
     private String refreshToken;
     private String authToken;
-    private long time;
+    private String time;
 
 
     public ZohoData(boolean useConfigFile) {
         if(useConfigFile) {
+            String CONFIG_FILE_PATH = "zoho.properties";
             Config config = new Config(CONFIG_FILE_PATH);
 
             this.clientId = config.get(ZohoDataKey.CLIENT_ID.toString());
@@ -27,7 +27,7 @@ public class ZohoData {
             this.redirectUri = config.get(ZohoDataKey.REDIRECT_URI.toString());
             this.refreshToken = config.get(ZohoDataKey.REFRESH_TOKEN.toString());
             this.authToken = config.get(ZohoDataKey.AUTHTOKEN.toString());
-            this.time = Long.parseLong(config.get(ZohoDataKey.TIME.toString()));
+            this.time = config.get(ZohoDataKey.TIME.toString());
         } else {
             Properties properties = System.getProperties();
 
@@ -37,7 +37,7 @@ public class ZohoData {
             this.redirectUri = properties.getProperty(ZohoDataKey.REDIRECT_URI.toString());
             this.refreshToken = properties.getProperty(ZohoDataKey.REFRESH_TOKEN.toString());
             this.authToken = properties.getProperty(ZohoDataKey.AUTHTOKEN.toString());
-            this.time = Long.parseLong(properties.getProperty(ZohoDataKey.TIME.toString()));
+            this.time = properties.getProperty(ZohoDataKey.TIME.toString());
         }
     }
 
@@ -65,19 +65,15 @@ public class ZohoData {
         return authToken;
     }
 
-    public long getTime() {
+    public String getTime() {
         return time;
-    }
-
-    public String getConfigFilePath() {
-        return CONFIG_FILE_PATH;
     }
 
     public void setAuthToken(String authToken) {
         this.authToken = authToken;
     }
 
-    public void setTime(long time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }
