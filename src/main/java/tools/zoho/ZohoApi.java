@@ -10,7 +10,7 @@ import java.util.Calendar;
 public class ZohoApi {
 
     private final String baseUrl = "https://www.zohoapis.com/crm/v2";
-    private ZohoData data = new ZohoData(false);
+    private ZohoData data = new ZohoData();
 
     public enum Api {
         DEALS_BY_CRITERIA   ("/Deals/search?criteria="),

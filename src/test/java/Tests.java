@@ -5,7 +5,6 @@ import tools.rest.RequestMethod;
 import tools.rest.Rest;
 import tools.text.IgnoredSpelling;
 import tools.text.Spelling;
-import tools.zoho.ZohoApi;
 
 import java.util.Arrays;
 import java.util.List;

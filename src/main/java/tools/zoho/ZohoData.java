@@ -1,5 +1,6 @@
 package tools.zoho;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import tools.Config;
 
 import java.util.Properties;
@@ -16,8 +17,10 @@ public class ZohoData {
     private String time;
 
 
-    public ZohoData(boolean useConfigFile) {
-        if(useConfigFile) {
+    public ZohoData() {
+        String useConfigFile = Dotenv.load().get("USE_CRM_CONFIG_FILE");
+        assert useConfigFile != null;
+        if(useConfigFile.toLowerCase().equals("true")) {
             String CONFIG_FILE_PATH = "zoho.properties";
             Config config = new Config(CONFIG_FILE_PATH);
 
