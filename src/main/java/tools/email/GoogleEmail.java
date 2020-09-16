@@ -4,7 +4,6 @@ import com.google.api.services.gmail.model.Message;
 import com.google.api.services.gmail.model.MessagePartHeader;
 import org.jsoup.Jsoup;
 import tools.email.constants.GmailHeader;
-import tools.email.constants.GmailQuery;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -17,9 +16,9 @@ public class GoogleEmail {
     private Message message;
 
 
-    public GoogleEmail(GmailQuery gmailQuery) {
+    public GoogleEmail(String query) {
         try {
-            this.message = Gmail_API.getMessages(gmailQuery.value).get(0);
+            this.message = Gmail_API.getMessages(query).get(0);
         } catch (IOException | GeneralSecurityException e) {
             e.printStackTrace();
         }

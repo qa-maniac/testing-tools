@@ -74,9 +74,4 @@ public class Rest {
     public String getBaseUrl() {
         return baseUrl;
     }
-
-
-    public String endpoint() {
-        return getBaseUrl();
-    }
 }
