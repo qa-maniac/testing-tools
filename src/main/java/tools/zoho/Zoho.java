@@ -5,13 +5,23 @@ import io.restassured.response.Response;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
 public class Zoho {
 
-    private ZohoApi api = new ZohoApi();
+    private ZohoApi api;
+
+
+    public Zoho() {
+        this.api = new ZohoApi();
+    }
+
+    public Zoho(Properties properties) {
+        this.api = new ZohoApi(properties);
+    }
 
 
     public void approveUser(String email) {

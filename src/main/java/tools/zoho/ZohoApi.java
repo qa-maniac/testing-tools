@@ -5,14 +5,15 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 import java.util.Calendar;
+import java.util.Properties;
 
 
 public class ZohoApi {
 
     private final String baseUrl = "https://www.zohoapis.com/crm/v2";
-    private ZohoData data = new ZohoData();
+    private ZohoData data;
 
-    public enum Api {
+    public enum ApiRoute {
         DEALS_BY_CRITERIA   ("/Deals/search?criteria="),
         DEAL_BY_ID          ("/Deals/"),
         USERS_BY_CRITERIA   ("/Contacts/search?criteria="),
@@ -20,16 +21,25 @@ public class ZohoApi {
         ;
         public String route;
 
-        Api(String route) {
+        ApiRoute(String route) {
             this.route = route;
         }
+    }
+
+
+    public ZohoApi() {
+        this.data = new ZohoData();
+    }
+
+    public ZohoApi(Properties properties) {
+        this.data = new ZohoData(properties);
     }
 
 
     public Response getUserByEmail(String email) {
         RestAssured.baseURI = baseUrl;
         String criteria = "(Email:equals:" + email + ")";
-        String route = Api.USERS_BY_CRITERIA.route + criteria;
+        String route = ApiRoute.USERS_BY_CRITERIA.route + criteria;
 
         RequestSpecification request = RestAssured
                 .given()
@@ -40,7 +50,7 @@ public class ZohoApi {
 
     public void approveUser(String id) {
         RestAssured.baseURI = baseUrl;
-        String route = Api.USER_BY_ID.route + id;
+        String route = ApiRoute.USER_BY_ID.route + id;
 
         String xmlDataString = "{\"data\":[{\"Document_Verified\":\"Approved\"}]}";
         RequestSpecification request = RestAssured
@@ -52,7 +62,7 @@ public class ZohoApi {
 
     public Response getDealsByUserEmail(String email, String date) {
         RestAssured.baseURI = baseUrl;
-        String route = Api.DEALS_BY_CRITERIA.route + "(Contact_Name:equals:" + getUserName(email) + ")&sort_by=Stage_Update_Time&sort_order=desc";
+        String route = ApiRoute.DEALS_BY_CRITERIA.route + "(Contact_Name:equals:" + getUserName(email) + ")&sort_by=Stage_Update_Time&sort_order=desc";
         RequestSpecification request = RestAssured.given()
                 .header("Authorization", "Zoho-oauthtoken " + getAccessToken())
                 .header("If-Modified-Since", date);
@@ -68,7 +78,7 @@ public class ZohoApi {
 
     public void approveTransaction(String identifier, double amount, String date) {
         RestAssured.baseURI = baseUrl;
-        String route = Api.DEAL_BY_ID.route + identifier;
+        String route = ApiRoute.DEAL_BY_ID.route + identifier;
         String xmlDataString = "{\"data\":[{\"Fiat_Exchange_Fee\":\"1\"," +
                 " \"Fiat_Exchange_Rate\":\"1\"," +
                 " \"Elegro_Net_Processing_Fee\":\"1\"," +
