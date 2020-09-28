@@ -18,8 +18,9 @@ public class GoogleEmail {
 
     public GoogleEmail(String query) {
         try {
+            Thread.sleep(5000);
             this.message = Gmail_API.getMessages(query).get(0);
-        } catch (IOException | GeneralSecurityException e) {
+        } catch (IOException | GeneralSecurityException | InterruptedException e) {
             e.printStackTrace();
         }
     }
