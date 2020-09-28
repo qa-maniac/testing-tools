@@ -6,7 +6,7 @@
 
     <groupId>com.github.qa-maniac</groupId>
     <artifactId>testing-tools</artifactId>
-    <version>0.0.3.3</version>
+    <version>0.0.3.4</version>
 
     <name>Testing tolls</name>
     <description>Tools for supporting automation testing.</description>

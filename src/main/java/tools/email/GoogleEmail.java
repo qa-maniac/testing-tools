@@ -26,6 +26,16 @@ public class GoogleEmail {
     }
 
 
+    public GoogleEmail(String query, int numberByOrder) {
+        try {
+            Thread.sleep(5000);
+            this.message = Gmail_API.getMessages(query).get(numberByOrder);
+        } catch (IOException | GeneralSecurityException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public List<MessagePartHeader> getHeaders() {
         List<MessagePartHeader> result = new LinkedList<>();
         try {
