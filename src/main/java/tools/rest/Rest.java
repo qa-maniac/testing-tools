@@ -70,7 +70,7 @@ public class Rest {
     }
 
 
-    public Response executeFormDataRequest(String route, RequestMethod method, RequestSpecification specification, String... token) throws Exception {
+    public Response executeRequest(String route, RequestMethod method, RequestSpecification specification, String... token) throws Exception {
         RestAssured.baseURI = baseUrl;
         assert (token.length <= 1);
 
