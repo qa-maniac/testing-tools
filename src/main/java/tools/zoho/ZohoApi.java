@@ -52,7 +52,7 @@ public class ZohoApi {
         RestAssured.baseURI = baseUrl;
         String route = ApiRoute.USER_BY_ID.route + id;
 
-        String xmlDataString = "{\"data\":[{\"Document_Verified\":\"Approved\"}]}";
+        String xmlDataString = "{\"data\":[{\"Document_Verified\":\"Approved\", Test_Contact:true}]}";
         RequestSpecification request = RestAssured
                 .given()
                 .header("Authorization", "Zoho-oauthtoken " + getAccessToken()).body(xmlDataString);
